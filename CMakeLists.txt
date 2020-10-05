@@ -142,7 +142,27 @@ option(ENABLE_REDIS "poco option \"ENABLE_REDIS\"" OFF)
 option(ENABLE_POCODOC "poco option \"ENABLE_POCODOC\"" OFF)
 option(ENABLE_TESTS "poco option \"ENABLE_TESTS\"" OFF)
 
+option(BUILD_XML "BUILD_XML poco option" OFF)
+option(BUILD_JSON "BUILD_JSON poco option" OFF)
+option(BUILD_MongoDB "BUILD_MongoDB poco option" OFF)
+option(BUILD_PDF "BUILD_PDF poco option" OFF)
+option(BUILD_Util "BUILD_Util poco option" OFF)
+option(BUILD_Net "BUILD_Net poco option" ON)
+option(BUILD_Web "BUILD_Web poco option" OFF)
+option(UNINSTALL_POCO "build the poco uninstall target" OFF)
+option(BUILD_DATA "BUILD_DATA poco option" OFF)
+option(BUILD_ZIP "BUILD_ZIP poco option" OFF)
 mark_as_advanced(
+        BUILD_XML
+        BUILD_JSON
+        BUILD_MongoDB
+        BUILD_PDF
+        BUILD_Util
+        BUILD_Net
+        BUILD_Web
+        UNINSTALL_POCO
+        BUILD_DATA
+        BUILD_ZIP
         ENABLE_APACHECONNECTOR
         ENABLE_CPPPARSER
         ENABLE_CRYPTO
