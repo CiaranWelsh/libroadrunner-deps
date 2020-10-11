@@ -13,10 +13,10 @@ jobs:
   include:
     - stage: New build script
     - name: "Linux"
-      - before_install:
-          - docker pull ciaranwelsh/ubuntu-base
-        script:
-          - docker run ciaranwelsh/ubuntu-base /bin/sh -c "wget https://raw.githubusercontent.com/CiaranWelsh/libroadrunner-deps/master/roadrunner_deps_build.py; python roadrunner_deps_build.py \"/libroadrunner-deps-install-docker\""
+    - before_install:
+        - docker pull ciaranwelsh/ubuntu-base
+      script:
+        - docker run ciaranwelsh/ubuntu-base /bin/sh -c "wget https://raw.githubusercontent.com/CiaranWelsh/libroadrunner-deps/master/roadrunner_deps_build.py; python roadrunner_deps_build.py /libroadrunner-deps-install-docker"
 
 # These are placeholders: still need to implement since docker containers are harder to configure for mac and windows
 #    - name : "Mac"
