@@ -9,6 +9,7 @@ branches:
 services: docker
 jobs:
   include:
+    - os: linux
     - stage: New build script
     - name: "Linux"
     - before_install:
