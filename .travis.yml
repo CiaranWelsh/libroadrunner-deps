@@ -13,7 +13,6 @@ branches:
   only:
     - master
     - develop
-    - travis-tests
 
 services: docker
 
@@ -29,6 +28,7 @@ matrix:
     - name: "macOS"
       os: osx
       osx_image: xcode12
+      language: cpp
       before_install:
         - wget https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Darwin-x86_64.tar.gz
         - tar -xvf cmake-3.18.4-Darwin-x86-64.tar.gz
@@ -42,8 +42,8 @@ matrix:
       script:
         - cmake --build . --target install -j 12
     - name: "Windows"
-      os: windows           # Windows 10.0.17134 N/A Build 17134
-      language: shell       # 'language: python' is an error on Travis CI Windows
+      os: windows
+      language: cpp
       before_install:
         - wget https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-win64-x64.zip
         - Expand-Archive cmake-3.18.4-win64-x64.zip -DestinationPath cmake-3.18.4-win64-x64;
