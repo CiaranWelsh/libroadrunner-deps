@@ -22,12 +22,12 @@ jobs:
         - python roadrunner_deps_build.py $HOME
     - os: osx
       name: osx
-#      script:
-#        - python roadrunner_deps_build.py $HOME
+      script:
+        - python roadrunner_deps_build.py $HOME
     - os: windows
       name: windows
-#      script:
-#        - .python roadrunner_deps_build.py $HOME
+      script:
+        - python roadrunner_deps_build.py $HOME
 #    - name: "Linux"
 #      - before_install:
 #          - docker pull ciaranwelsh/ubuntu-base
