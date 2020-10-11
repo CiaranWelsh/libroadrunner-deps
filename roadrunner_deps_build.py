@@ -14,7 +14,8 @@ Options:
 import os, sys
 import subprocess
 import argparse
-
+import requests
+import zipfile
 parser = argparse.ArgumentParser()
 parser.add_argument("install-prefix", help="the cmake_install_prefix variable")
 parser.add_argument("--with-llvm", help="Download and build llvm-6.x (takes longer)", default=False,
@@ -22,10 +23,38 @@ parser.add_argument("--with-llvm", help="Download and build llvm-6.x (takes long
 parser.add_argument("--build-type", type=str, help="the cmake_build_type variable", default="Release")
 args = parser.parse_args()
 
+try:
+    subprocess.check_call(["cmake", "--version"])
+    cmake_command = "cmake"
+except subprocess.CalledProcessError as e:
+    if sys.platform == "windows":
+        l = r"https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-win64-x64.zip"
+    elif sys.platform == "linux":
+        l = r"https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Linux-x86_64.tar.gz"
+    elif sys.platform == "mac":
+        l = r"https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Darwin-x86_64.tar.gz"
+    else:
+        raise e
+    cmake_zip = os.path.join(os.getcwd(), "cmake_compressed")
+    cmake_dir = os.path.join(os.getcwd(), "cmake")
+    r = requests.get(l, allow_redirects=True)
+    open(cmake_zip, 'wb').write(r.content)
+
+    if sys.platform == "windows":
+        with zipfile.ZipFile(cmake_zip, 'r') as zip_ref:
+            zip_ref.extractall(cmake_dir)
+        cmake_command = os.path.join(os.path.join(cmake_dir, "bin"), "cmake.exe")
+    else:
+        import tarfile
+        my_tar = tarfile.open(cmake_zip)
+        my_tar.extractall(cmake_dir) # specify which folder to extract to
+        my_tar.close()
+        cmake_command = os.path.join(os.path.join(cmake_dir, "bin"), "cmake")
+
 
 def do_check_call(commands: list, error_message=None):
     try:
-        cmake_found = subprocess.check_call(commands)
+        subprocess.check_call(commands)
     except subprocess.CalledProcessError as e:
         print(e.output)
         if error_message:
@@ -36,7 +65,7 @@ def do_check_call(commands: list, error_message=None):
 BASE_DIRECTORY = os.getcwd()
 
 # will error if cmake not available
-do_check_call(["cmake", "--version"],
+do_check_call([cmake_command, "--version"],
               "Make sure cmake is available and your environment variables are correctly configured to allow the 'cmake' command to be run from shell")
 
 # clone repo
