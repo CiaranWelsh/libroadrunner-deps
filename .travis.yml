@@ -22,10 +22,14 @@ jobs:
         - python roadrunner_deps_build.py $HOME
     - os: osx
       name: osx
+      language: python
+      python: 3.7
       script:
         - python roadrunner_deps_build.py $HOME
     - os: windows
       name: windows
+      language: python
+      python: 3.7
       script:
         - python roadrunner_deps_build.py $HOME
 #    - name: "Linux"
