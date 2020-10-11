@@ -1,21 +1,31 @@
-sudo: required
 language: cpp
 notifications:
   email:
-      - cwelsh2@uw.edu
+    - cwelsh2@uw.edu
 branches:
   only:
     - master
     - develop
     - travis-tests
 services: docker
-matrix:
+jobs:
   include:
-    - name: "Linux"
-      - before_install:
-          - docker pull ciaranwelsh/ubuntu-base
-        script:
-          - docker run ciaranwelsh/ubuntu-base /bin/sh -c "wget https://raw.githubusercontent.com/CiaranWelsh/libroadrunner-deps/master/roadrunner_deps_build.py; python roadrunner_deps_build.py \"/libroadrunner-deps-install-docker\""
+    - stage: New build script
+      os: linux
+      script:
+        - ./roadrunner_deps_build.py
+    - os: osx
+      script:
+        - ./roadrunner_deps_build.py
+    - os: windows
+      script:
+        - ./roadrunner_deps_build.py
+        -
+#    - name: "Linux"
+#      - before_install:
+#          - docker pull ciaranwelsh/ubuntu-base
+#        script:
+#          - docker run ciaranwelsh/ubuntu-base /bin/sh -c "wget https://raw.githubusercontent.com/CiaranWelsh/libroadrunner-deps/master/roadrunner_deps_build.py; python roadrunner_deps_build.py \"/libroadrunner-deps-install-docker\""
 #    - name: "macOS"
 #      os: osx
 #      osx_image: xcode12
