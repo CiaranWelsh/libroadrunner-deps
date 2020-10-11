@@ -84,7 +84,7 @@ os.chdir(LIBROADRUNNER_DEPS_BUILD_DIR)
 if (args.with_llvm):
     do_check_call([
         "cmake",
-        f"-DCMAKE_INSTALL_PREFIX={args.cmake_install_prefix}",
+        f"-DCMAKE_INSTALL_PREFIX={args.install_prefix}",
         f"CMAKE_BUILD_TYPE={args.cmake_build_type}",
         "-DBUILD_LLVM=ON",
         LIBROADRUNNER_DEPS_DIR
@@ -92,7 +92,7 @@ if (args.with_llvm):
 else:
     do_check_call([
         "cmake",
-        f"-DCMAKE_INSTALL_PREFIX={args.cmake_install_prefix}",
+        f"-DCMAKE_INSTALL_PREFIX={args.install_prefix}",
         f"CMAKE_BUILD_TYPE={args.cmake_build_type}",
         LIBROADRUNNER_DEPS_DIR
     ])
