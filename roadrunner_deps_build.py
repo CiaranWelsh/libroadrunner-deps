@@ -33,8 +33,8 @@ elif sys.platform == "linux":
     l = r"https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Linux-x86_64.tar.gz"
 elif sys.platform == "mac":
     l = r"https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Darwin-x86_64.tar.gz"
-else:
-    raise e
+# else:
+#     raise e
 cmake_zip = os.path.join(os.getcwd(), "cmake_compressed")
 cmake_dir = os.path.join(os.getcwd(), "cmake")
 r = requests.get(l, allow_redirects=True)
