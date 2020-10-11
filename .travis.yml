@@ -9,11 +9,11 @@ branches:
 services: docker
 jobs:
   include:
-    - os: linux
-    - language: c++
     - stage: New build script
-    - name: "Linux"
-    - before_install:
+      os: linux
+      language: c++
+      name: "Linux"
+      before_install:
         - docker pull ciaranwelsh/ubuntu-base
       script:
         - docker run ciaranwelsh/ubuntu-base /bin/sh -c "wget https://raw.githubusercontent.com/CiaranWelsh/libroadrunner-deps/master/roadrunner_deps_build.py; python roadrunner_deps_build.py /libroadrunner-deps-install-docker"
