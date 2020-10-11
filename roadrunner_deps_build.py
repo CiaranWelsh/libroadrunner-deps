@@ -17,10 +17,10 @@ import argparse
 import requests
 import zipfile
 parser = argparse.ArgumentParser()
-parser.add_argument("install-prefix", help="the cmake_install_prefix variable")
-parser.add_argument("--with-llvm", help="Download and build llvm-6.x (takes longer)", default=False,
+parser.add_argument("install_prefix", help="the cmake_install_prefix variable")
+parser.add_argument("--with_llvm", help="Download and build llvm-6.x (takes longer)", default=False,
                     action="store_true")
-parser.add_argument("--build-type", type=str, help="the cmake_build_type variable", default="Release")
+parser.add_argument("--build_type", type=str, help="the cmake_build_type variable", default="Release")
 args = parser.parse_args()
 
 try:
