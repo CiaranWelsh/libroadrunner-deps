@@ -17,10 +17,42 @@ branches:
 
 services: docker
 
-before_install:
-  - docker pull ciaranwelsh/ubuntu-base
-
-script:
-  - docker run ciaranwelsh/ubuntu-base /bin/sh -c "wget https://raw.githubusercontent.com/CiaranWelsh/libroadrunner-deps/master/roadrunner_deps_build.py; python roadrunner_deps_build.py \"/libroadrunner-deps-install-docker\""
 
 
+matrix:
+  include:
+    - name: "Linux"
+      - before_install:
+          - docker pull ciaranwelsh/ubuntu-base
+        script:
+          - docker run ciaranwelsh/ubuntu-base /bin/sh -c "wget https://raw.githubusercontent.com/CiaranWelsh/libroadrunner-deps/master/roadrunner_deps_build.py; python roadrunner_deps_build.py \"/libroadrunner-deps-install-docker\""
+    - name: "macOS"
+      os: osx
+      osx_image: xcode12
+      before_install:
+        - wget https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Darwin-x86_64.tar.gz
+        - tar -xvf cmake-3.18.4-Darwin-x86-64.tar.gz
+        - export PATH="$PATH:$(pwd)/cmake-3.18.4-Darwin-x86-64/bin
+        - cmake --version
+        - git clone https://github.com/CiaranWelsh/libroadrunner-deps.git
+        - cd libroadrunner-deps
+        - mkdir build
+        - cd build
+        - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(pwd)/../install ..
+      script:
+        - cmake --build . --target install -j 12
+    - name: "Windows"
+      os: windows           # Windows 10.0.17134 N/A Build 17134
+      language: shell       # 'language: python' is an error on Travis CI Windows
+      before_install:
+        - wget https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-win64-x64.zip
+        - Expand-Archive cmake-3.18.4-win64-x64.zip -DestinationPath cmake-3.18.4-win64-x64;
+        - export PATH="$PATH:$(pwd)/cmake-3.18.4-Darwin-x86-64/bin
+        - cmake --version
+        - git clone https://github.com/CiaranWelsh/libroadrunner-deps.git
+        - cd libroadrunner-deps
+        - mkdir build
+        - cd build
+        - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(pwd)/../install ..
+      script:
+        - cmake --build . --target install -j 12
