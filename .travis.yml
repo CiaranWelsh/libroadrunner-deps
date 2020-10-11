@@ -11,13 +11,16 @@ services: docker
 jobs:
   include:
     - stage: New build script
+      name: linux
       os: linux
       script:
         - ./roadrunner_deps_build.py
     - os: osx
+      name: osx
       script:
         - ./roadrunner_deps_build.py
     - os: windows
+      name: windows
       script:
         - ./roadrunner_deps_build.py
 #    - name: "Linux"
