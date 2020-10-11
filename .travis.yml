@@ -12,6 +12,7 @@ services: docker
 jobs:
   include:
     - stage: New build script
+      language: python
       python: 3.7
       name: linux
       os: linux
