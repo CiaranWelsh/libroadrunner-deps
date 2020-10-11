@@ -1,5 +1,3 @@
-sudo: required
-language: cpp
 notifications:
   email:
       - cwelsh2@uw.edu
