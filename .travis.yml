@@ -16,6 +16,8 @@ jobs:
       python: 3.7
       name: linux
       os: linux
+      before_install:
+        - pip install requests
       script:
         - python roadrunner_deps_build.py $HOME
     - os: osx
