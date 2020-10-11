@@ -20,7 +20,6 @@ jobs:
     - os: windows
       script:
         - ./roadrunner_deps_build.py
-        -
 #    - name: "Linux"
 #      - before_install:
 #          - docker pull ciaranwelsh/ubuntu-base
