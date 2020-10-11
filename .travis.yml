@@ -8,21 +8,22 @@ branches:
     - develop
     - travis-tests
 services: docker
+
 jobs:
   include:
     - stage: New build script
       name: linux
       os: linux
       script:
-        - ./roadrunner_deps_build.py $HOME
+        - python roadrunner_deps_build.py $HOME
     - os: osx
       name: osx
       script:
-        - ./roadrunner_deps_build.py $HOME
+        - python roadrunner_deps_build.py $HOME
     - os: windows
       name: windows
       script:
-        - ./roadrunner_deps_build.py $HOME
+        - .python roadrunner_deps_build.py $HOME
 #    - name: "Linux"
 #      - before_install:
 #          - docker pull ciaranwelsh/ubuntu-base
