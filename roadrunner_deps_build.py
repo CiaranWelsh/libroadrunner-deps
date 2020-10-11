@@ -26,49 +26,6 @@ parser.add_argument("--with_llvm", help="Download and build llvm-6.x (takes long
 parser.add_argument("--build_type", type=str, help="the cmake_build_type variable", default="Release")
 args = parser.parse_args()
 
-try:
-    cmake_version = subprocess.run(["cmake", "--version"], capture_output=True).stdout
-    major, minor, patch = re.findall("(\d*).(\d*).(\d*)", cmake_version)[0]
-    if int(major) != 3:
-        raise ValueError("Cmake version > 3.14 required")
-    if int(minor) < 14:
-        raise ValueError("Cmake version > 3.14 required")
-    cmake_command = "cmake"
-except (subprocess.CalledProcessError, ValueError) as e:
-
-    if sys.platform == "windows":
-        l = r"https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-win64-x64.zip"
-        cmake_file = "cmake-3.18.4-win64-x64.zip"
-    elif sys.platform == "linux":
-        l = r"https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Linux-x86_64.tar.gz"
-        cmake_file = "cmake-3.18.4-Linux-x86_64.tar.gz"
-    elif sys.platform == "darwin":
-        l = r"https://github.com/Kitware/CMake/releases/download/v3.18.4/cmake-3.18.4-Darwin-x86_64.tar.gz"
-        cmake_file = "cmake-3.18.4-Darwin-x86_64.tar.gz"
-    else:
-        raise e
-
-    cmake_dir = os.path.join(os.getcwd(), "cmake")
-    r = requests.get(l, allow_redirects=True)
-    open(cmake_file, 'wb').write(r.content)
-
-    if sys.platform == "windows":
-        with zipfile.ZipFile(cmake_file, 'r') as zip_ref:
-            zip_ref.extractall(cmake_dir)
-        cmake_command = os.path.join(cmake_dir, "bin/cmake.exe")
-    elif sys.platform == "darwin":
-        my_tar = tarfile.open(cmake_file)
-        my_tar.extractall(cmake_dir) # specify which folder to extract to
-        my_tar.close()
-        cmake_command = os.path.join(cmake_dir, "CMake.app/Contents/bin/cmake")
-    elif sys.platform == "linux":
-        my_tar = tarfile.open(cmake_file)
-        my_tar.extractall(cmake_dir) # specify which folder to extract to
-        my_tar.close()
-        cmake_command = os.path.join(cmake_dir, "bin/cmake")
-
-
-
 
 def do_check_call(commands: list, error_message=None):
     try:
@@ -83,7 +40,7 @@ def do_check_call(commands: list, error_message=None):
 BASE_DIRECTORY = os.getcwd()
 
 # will error if cmake not available
-do_check_call([cmake_command, "--version"],
+do_check_call(["cmake", "--version"],
               "Make sure cmake is available and your environment variables are correctly configured to allow the 'cmake' command to be run from shell")
 
 # clone repo
