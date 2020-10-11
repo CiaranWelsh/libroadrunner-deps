@@ -85,7 +85,7 @@ if (args.with_llvm):
     do_check_call([
         "cmake",
         f"-DCMAKE_INSTALL_PREFIX={args.install_prefix}",
-        f"CMAKE_BUILD_TYPE={args.cmake_build_type}",
+        f"CMAKE_BUILD_TYPE={args.build_type}",
         "-DBUILD_LLVM=ON",
         LIBROADRUNNER_DEPS_DIR
     ])
@@ -93,7 +93,7 @@ else:
     do_check_call([
         "cmake",
         f"-DCMAKE_INSTALL_PREFIX={args.install_prefix}",
-        f"CMAKE_BUILD_TYPE={args.cmake_build_type}",
+        f"CMAKE_BUILD_TYPE={args.build_type}",
         LIBROADRUNNER_DEPS_DIR
     ])
 
