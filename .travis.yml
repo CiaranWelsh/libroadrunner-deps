@@ -10,6 +10,7 @@ services: docker
 jobs:
   include:
     - os: linux
+    - language: c++
     - stage: New build script
     - name: "Linux"
     - before_install:
