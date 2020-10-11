@@ -11,6 +11,7 @@ branches:
 services: docker
 jobs:
   include:
+    - stage: New build script
     - name: "Linux"
       - before_install:
           - docker pull ciaranwelsh/ubuntu-base
