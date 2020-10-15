@@ -40,8 +40,9 @@ wrappers/C/Testing/alexTestOutput.xml
 
 # build trees
 build
-build*
 
+
+# jetbrains build trees
 # jetbrains build trees
 cmake-build*
 
