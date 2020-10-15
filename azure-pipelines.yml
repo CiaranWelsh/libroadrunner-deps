@@ -14,8 +14,8 @@ pool:
 container: ciaranwelsh/ubuntu-base:latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: ci/get-llvm-6.x-linux.sh
+  displayName: 'Get llvm-6.x'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
