@@ -14,7 +14,7 @@ pool:
 container: ciaranwelsh/ubuntu-base:latest
 
 steps:
-- script: ci/get-llvm-6.x-linux.sh
+- script: bash $(pwd)/ci/get-llvm-6.x-linux.sh
   displayName: 'Get llvm-6.x'
 
 - script: |
