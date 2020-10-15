@@ -14,10 +14,6 @@ pool:
 container: ciaranwelsh/ubuntu-base:latest
 
 steps:
-- script: bash $(pwd)/ci/get-llvm-6.x-linux.sh
-  displayName: 'Get llvm-6.x'
+- script: bash $(pwd)/ci/build-linux.sh
+  displayName: 'Build roadrunner dependencies on Linux'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
