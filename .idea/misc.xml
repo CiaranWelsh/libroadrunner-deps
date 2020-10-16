@@ -4,6 +4,8 @@
   <component name="CidrRootsConfiguration">
     <excludeRoots>
       <file path="$PROJECT_DIR$/install-mac" />
+      <file path="$PROJECT_DIR$/roadrunner-deps-msvc2019-x64-debug" />
+      <file path="$PROJECT_DIR$/roadrunner-deps-msvc2019-x64-release" />
     </excludeRoots>
   </component>
 </project>
