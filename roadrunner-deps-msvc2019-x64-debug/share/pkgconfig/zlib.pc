@@ -1,0 +1,13 @@
+prefix=D:/roadrunner-deps/roadrunner-deps-msvc2019-x64-debug
+exec_prefix=D:/roadrunner-deps/roadrunner-deps-msvc2019-x64-debug
+libdir=D:/roadrunner-deps/roadrunner-deps-msvc2019-x64-debug/lib
+sharedlibdir=D:/roadrunner-deps/roadrunner-deps-msvc2019-x64-debug/lib
+includedir=D:/roadrunner-deps/roadrunner-deps-msvc2019-x64-debug/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.11.1
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
